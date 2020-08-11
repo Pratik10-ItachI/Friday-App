@@ -1,0 +1,198 @@
+package com.example.pratikstsukyomi;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+/**
+ * This app displays an order form to order coffee.
+ */
+public class MainActivity extends AppCompatActivity {
+
+    private EditText day0 ;
+    private EditText month0 ;
+    private EditText year0 ;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    /**
+     * This method is called when the order button is clicked.
+     */
+
+
+    public void submitOrder(View view) {
+
+                 day0 = (EditText) findViewById(R.id.day1);
+                 month0 = (EditText) findViewById(R.id.month1);
+                 year0 = (EditText) findViewById(R.id.year1);
+                TextView textView = (TextView) findViewById(R.id.textView);
+
+                int day = Integer.parseInt(day0.getText().toString());
+                int month = Integer.parseInt(month0.getText().toString());
+                int year = Integer.parseInt(year0.getText().toString());
+
+
+        int odd = 0;
+        boolean isleap = false;
+
+        int odd_month=0 , odd_year=0;
+
+        if((year%4==0 && year%100 != 0)||(year%400 == 0))
+        {
+            isleap = true;
+        }
+
+        year-=1;
+        year = year %400;
+
+        int cen = year/100;
+        year = year - cen*100;
+
+        switch(cen)
+        {
+            case 1:
+                odd_year += 5;
+                break;
+            case 2:
+                odd_year += 3;
+                break;
+            case 3:
+                odd_year += 1;
+                break;
+            default:
+                break;
+        }
+
+        odd_year += ((year/4)*2 + (year-(year/4)))%7;
+
+        if(isleap)
+        {
+            switch(month)
+            {
+                case 1:
+                    odd_month = 0;
+                    break;
+                case 2:
+                    odd_month = 31;
+                    break;
+                case 3:
+                    odd_month = 60;
+                    break;
+                case 4:
+                    odd_month = 91;
+                    break;
+                case 5:
+                    odd_month = 121;
+                    break;
+                case 6:
+                    odd_month = 152;
+                    break;
+                case 7:
+                    odd_month = 182;
+                    break;
+                case 8:
+                    odd_month = 213;
+                    break;
+                case 9:
+                    odd_month = 244;
+                    break;
+                case 10:
+                    odd_month = 274;
+                    break;
+                case 11:
+                    odd_month = 305;
+                    break;
+                case 12:
+                    odd_month = 335;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        else
+        {
+            switch(month)
+            {
+                case 1:
+                    odd_month = 0;
+                    break;
+                case 2:
+                    odd_month = 31;
+                    break;
+                case 3:
+                    odd_month = 59;
+                    break;
+                case 4:
+                    odd_month = 90;
+                    break;
+                case 5:
+                    odd_month = 120;
+                    break;
+                case 6:
+                    odd_month = 151;
+                    break;
+                case 7:
+                    odd_month = 181;
+                    break;
+                case 8:
+                    odd_month = 212;
+                    break;
+                case 9:
+                    odd_month = 243;
+                    break;
+                case 10:
+                    odd_month = 273;
+                    break;
+                case 11:
+                    odd_month = 304;
+                    break;
+                case 12:
+                    odd_month = 334;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        odd_month += day;
+        odd_month %= 7;
+
+        odd = (odd_month+odd_year)%7;
+
+                switch (odd) {
+                    case 0:
+                        textView.setText("SUNDAY");
+                        break;
+                    case 1:
+                        textView.setText("MONDAY");
+                        break;
+                    case 2:
+                        textView.setText("TUESDAY");
+                        break;
+                    case 3:
+                        textView.setText("WEDNESDAY");
+                        break;
+                    case 4:
+                        textView.setText("THURSDAY");
+                        break;
+                    case 5:
+                        textView.setText("FRIDAY");
+                        break;
+                    case 6:
+                        textView.setText("SATURDAY");
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+
+
+        }
