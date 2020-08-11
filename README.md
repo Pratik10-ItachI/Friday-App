@@ -1,0 +1,2 @@
+# Friday-App
+Day Calculator
